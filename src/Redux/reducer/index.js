@@ -35,9 +35,13 @@ function rootReducer(state = initialState, action) {
         createtask: array
       }
     case COMPLETE_TASK:
+      if (!state.completetask.find(task => task.id === action.payload + 1)) {
+        state.completetask.push(state.createtask[action.payload])
+
+      }
       return {
         ...state,
-        completetask: action.payload
+        createtask: state.createtask
       }
   }
   return state

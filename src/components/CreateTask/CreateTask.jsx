@@ -12,6 +12,9 @@ function CreateTask() {
     const dispatch = useDispatch()
     const { createtask, deletetask } = useSelector((state) => state)    // const createtask = useSelector ((state)=> state.createtask)
     const [task, setTask] = useState("")
+    const [editTask, setEditTask] = useState("")
+
+
 
 
 
@@ -21,8 +24,12 @@ function CreateTask() {
         setTask(event.target.value)
     }
 
+    function handleInputEdit(event) {
+        event.preventDefault()
 
+        setEditTask(event.target.value)
 
+    }
 
 
     return (
@@ -40,30 +47,59 @@ function CreateTask() {
             <button
                 className="botonestarea"
                 onClick={() => {
-                    dispatch(CrearTarea(task))
+                    dispatch(CrearTarea({ status: false, task: task, id: createtask.length + 1, edit: false, prevTask: task }))
                     setTask("")    //esto hace que cada vez que se de click se borre todo todito (lo del input)
                 }}
             >Agregar Tarea</button>
             <div> {createtask.map((r, index) =>
-                <div>
+                <div key={index}>
                     <button
                         className="botoncerrar"
                         onClick={() => {
                             dispatch(BorrarTarea(index))         //
                         }}
 
-                    > X </button>
+                    >X</button>
                     <button
-                        onClick={() => { dispatch(EditarTarea()) }}
-                    > Edit </button>
-                    <button
+                        onClick={() => {
+                            dispatch(EditarTarea())
+                            if (r.edit) {
+                                dispatch(EditarTarea(index, { ...r, edit: false, task: editTask }))
+                                setEditTask("")
+                            } else {
+                                dispatch(EditarTarea(index, { ...r, edit: true }))
+                                setEditTask(r.task)
+                            }
 
-                    > Complete </button>
-                    <p key={index}>{r}</p>
+                        }}
+                    >{r.edit ? "Done" : "Edit"}</button>
+                    <button
+                        onClick={() => {
+                            dispatch(CompletarTarea(index))
+                            r.status
+                                ? dispatch(EditarTarea(index, { ...r, status: false }))
+                                : dispatch(EditarTarea(index, { ...r, status: true }))
+
+                        }}
+                    >{r.status ? "Deshacer" : "Complete"}</button>
+                    {r.edit
+                        ? <input
+                            onChange={(event) => handleInputEdit(event)}
+                            value={editTask}
+
+                        >
+                        </input>
+
+                        : <p
+                            key={index}
+                            className={r.status
+                                ? "completeTask"
+                                : "incompleteTask"}
+                        >{r.task}</p>}
 
                 </div>)}
             </div>
-
+            <p> Solo editar una tarea a la vez, gracias</p>
         </div>
     )
 }
