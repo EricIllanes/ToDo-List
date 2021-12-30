@@ -1,5 +1,4 @@
-import React, { Component } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useState } from "react"
 import { CrearTarea } from "../../Redux/actions";
 import { BorrarTarea } from "../../Redux/actions";

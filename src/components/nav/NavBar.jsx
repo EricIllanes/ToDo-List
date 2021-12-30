@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import { Link, NavLink } from "react-router-dom";
+
+import { Link } from "react-router-dom";
 import "./NavBar.css"
-import { connect } from "react-redux";
+
 
 export default function NavBar() {
     return (
@@ -13,7 +13,7 @@ export default function NavBar() {
                 <Link to="deletetask" className="botonnavbar"><button>Tareas Eliminadas</button></Link>
 
                 <div>
-                    <h1> TuDu Lizz Taylor</h1>
+                    <h1> ToDo List</h1>
                 </div>
             </div>
         </header>
