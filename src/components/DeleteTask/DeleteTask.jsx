@@ -1,15 +1,14 @@
+import { useSelector } from "react-redux";
+import "./DeleteTask.css"
 
-import { useDispatch, useSelector } from "react-redux";
-
-function DeleteTask(props) {
-   const dispatch = useDispatch()
+function DeleteTask() {
    const { deletetask } = useSelector((state) => state)
 
-
    return (
-      <div>
+      <div className="createtask">
 
-
+         <h3>Acá puedes encontrar tus tareas eliminadas:</h3>
+         <div> {deletetask.map((r, index) => <p key={index}>{r.task}</p>)}</div>
       </div>
    )
 }

@@ -46,8 +46,15 @@ function CreateTask() {
             <button
                 className="botonestarea"
                 onClick={() => {
-                    dispatch(CrearTarea({ status: false, task: task, id: createtask.length + 1, edit: false, prevTask: task }))
-                    setTask("")    //esto hace que cada vez que se de click se borre todo todito (lo del input)
+                    if (!task) {
+                        alert("Debes escribir una tarea")
+                    } else {
+                        dispatch(CrearTarea({ status: false, task: task, id: createtask.length + 1, edit: false, prevTask: task }))
+                        /*
+                            despacho un objeto a mi array createtask con {status: ,task: , id: , edit, prevTask, }
+                        */
+                        setTask("")             //esto hace que cada vez que se de click se borre todo todito (lo del input)
+                    }
                 }}
             >Agregar Tarea</button>
             <div> {createtask.map((r, index) =>
@@ -55,7 +62,8 @@ function CreateTask() {
                     <button
                         className="botoncerrar"
                         onClick={() => {
-                            dispatch(BorrarTarea(index))         //
+                            dispatch(BorrarTarea(index))
+                            alert("¿Quieres borrar esta tarea?")         //
                         }}
 
                     >X</button>
@@ -98,7 +106,7 @@ function CreateTask() {
 
                 </div>)}
             </div>
-            <p> Solo editar una tarea a la vez, gracias</p>
+
         </div>
     )
 }

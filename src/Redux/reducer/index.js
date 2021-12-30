@@ -1,4 +1,4 @@
-import { CREATE_TASK, DELETE_TASK, EDIT_TASK, COMPLETE_TASK } from "../actions";
+import { CREATE_TASK, DELETE_TASK, EDIT_TASK, COMPLETE_TASK, RECUPERAR_TAREA } from "../actions";
 
 const initialState = {
   createtask: [],
@@ -39,6 +39,12 @@ function rootReducer(state = initialState, action) {
         state.completetask.push(state.createtask[action.payload])
 
       }
+      return {
+        ...state,
+        createtask: state.createtask
+      }
+    case RECUPERAR_TAREA:
+      state.createtask.push(state.deletetask.splice(action.payload, 1))
       return {
         ...state,
         createtask: state.createtask

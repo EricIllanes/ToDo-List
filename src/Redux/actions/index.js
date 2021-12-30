@@ -2,7 +2,7 @@ export const CREATE_TASK = " CREATE_TASK"
 export const DELETE_TASK = "DELETE_TASK"
 export const EDIT_TASK = "EDIT_TASK"
 export const COMPLETE_TASK = "COMPLETE_TASK"
-
+export const RECUPERAR_TAREA = "RECUPERAR_TAREA"
 
 
 export function CrearTarea(payload) {
@@ -37,5 +37,12 @@ export function CompletarTarea(index) {
         type: COMPLETE_TASK,
         payload: index
 
+    }
+}
+
+export function recuperarTarea(index) {
+    return {
+        type: RECUPERAR_TAREA,
+        payload: index
     }
 }
