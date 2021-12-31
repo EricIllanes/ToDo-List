@@ -6,15 +6,16 @@ import "./NavBar.css"
 export default function NavBar() {
     return (
         <header className="navbar">
-            <div>
+            <div className="botonesnav">
 
-                <Link to="/" className="botonnavbar"><button>Home</button></Link>
-                <Link to="completetask" className="botonnavbar"><button>Tareas Completadas</button></Link>
-                <Link to="deletetask" className="botonnavbar"><button>Tareas Eliminadas</button></Link>
-                <Link to="about" className="botonnavbar"><button>About</button></Link>
-                <div>
-                    <h1> ToDo List</h1>
-                </div>
+                <Link to="/" ><button className="botonnavbar">Home</button></Link>
+                <Link to="deletetask" ><button className="botonnavbar">Tareas Eliminadas</button></Link>
+                <Link to="about" ><button className="botonnavbar">About</button></Link>
+            </div>
+            <div className="textoimg">
+                <img src="https://cdn-icons-png.flaticon.com/512/2132/2132707.png" alt="logo" className="logo1"></img>
+                <h1 className="titulo"> Lista de Tareas</h1>
+                <img src="https://cdn-icons-png.flaticon.com/512/2132/2132707.png" alt="logo" className="logo2"></img>
             </div>
         </header>
 

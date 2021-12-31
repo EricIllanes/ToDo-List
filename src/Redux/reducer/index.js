@@ -18,7 +18,7 @@ function rootReducer(state = initialState, action) {
       }
     case DELETE_TASK:
       // state.createtask.splice(action.payload, 0)
-      state.deletetask.push(state.createtask.splice(action.payload, 1)) // acá con el splice borra la tarea deseada y hace un pusheo al array de las tareas eliminadas
+      state.deletetask.push(state.createtask.splice(action.payload, 1)[0]) // acá con el splice borra la tarea deseada y hace un pusheo al array de las tareas eliminadas
       return {
         ...state,
         createtask: state.createtask
@@ -44,10 +44,10 @@ function rootReducer(state = initialState, action) {
         createtask: state.createtask
       }
     case RECUPERAR_TAREA:
-      state.createtask.push(state.deletetask.splice(action.payload, 1))
+      state.createtask.push(state.deletetask.splice(action.payload, 1)[0])
       return {
         ...state,
-        createtask: state.createtask
+        deletetask: state.deletetask
       }
   }
   return state

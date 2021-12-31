@@ -1,15 +1,27 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import "./DeleteTask.css"
+import { recuperarTarea } from "../../Redux/actions";
 
 function DeleteTask() {
+   const dispatch = useDispatch()
    const { deletetask } = useSelector((state) => state)
 
    return (
-      <div className="createtask">
+      <div>
 
          <h3>Acá puedes encontrar tus tareas eliminadas:</h3>
-         <div> {deletetask.map((r, index) => <p key={index}>{r.task}</p>)}</div>
+         <div>{deletetask.map((r, index) =>
+            <div key={index} className="tareas">
+               <button
+                  className="recuperar"
+                  onClick={() => { dispatch(recuperarTarea(index)) }}
+               > Recuperar</button>
+               <p key={index}>{r.task}</p>
+            </div>
+         )}</div>
+
       </div>
+
    )
 }
 

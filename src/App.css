@@ -1,5 +1,13 @@
 .App {
   text-align: center;
+  background-color: rgb(238, 234, 199);
+  background-size: 50%;
+  backface-visibility:inherit;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  width: 100%;
+  height: 100vh;
 }
 
 .App-logo {

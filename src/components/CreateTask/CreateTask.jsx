@@ -32,81 +32,82 @@ function CreateTask() {
 
 
     return (
+
         <div className="createtask">
+            <div>
+                <h3>Escribe tus tareas acá :D</h3>
+                <input
+                    type="text"
+                    className="tareagregada"
+                    placeholder="Agregar nueva tarea..."
+                    onChange={(event) => handleInputChange(event)}
+                    value={task}
+                >
+                </input>
+                <button
+                    className="botonestarea"
+                    onClick={() => {
+                        if (!task) {
+                            alert("Debes escribir una tarea")
+                        } else {
+                            dispatch(CrearTarea({ status: false, task: task, id: createtask.length + 1, edit: false, prevTask: task }))
+                            /*
+                                despacho un objeto a mi array createtask con {status: ,task: , id: , edit, prevTask, }
+                            */
+                            setTask("")             //esto hace que cada vez que se de click se borre todo todito (lo del input)
+                        }
+                    }}
+                >Agregar Tarea</button>
+                <div className="tareas"> {createtask.map((r, index) =>
+                    <div key={index}>
+                        <button
+                            className="botoncerrar"
+                            onClick={() => {
+                                dispatch(BorrarTarea(index))
+                                alert("¿Quieres borrar esta tarea?")         //
+                            }}
 
-            <h3>Escribe tus tareas acá :D</h3>
-            <input
-                type="text"
-                className="tareagregada"
-                placeholder="Agregar nueva tarea..."
-                onChange={(event) => handleInputChange(event)}
-                value={task}
-            >
-            </input>
-            <button
-                className="botonestarea"
-                onClick={() => {
-                    if (!task) {
-                        alert("Debes escribir una tarea")
-                    } else {
-                        dispatch(CrearTarea({ status: false, task: task, id: createtask.length + 1, edit: false, prevTask: task }))
-                        /*
-                            despacho un objeto a mi array createtask con {status: ,task: , id: , edit, prevTask, }
-                        */
-                        setTask("")             //esto hace que cada vez que se de click se borre todo todito (lo del input)
-                    }
-                }}
-            >Agregar Tarea</button>
-            <div> {createtask.map((r, index) =>
-                <div key={index}>
-                    <button
-                        className="botoncerrar"
-                        onClick={() => {
-                            dispatch(BorrarTarea(index))
-                            alert("¿Quieres borrar esta tarea?")         //
-                        }}
+                        >X</button>
+                        <button
+                            onClick={() => {
+                                dispatch(EditarTarea())
+                                if (r.edit) {
+                                    dispatch(EditarTarea(index, { ...r, edit: false, task: editTask }))
+                                    setEditTask("")
+                                } else {
+                                    dispatch(EditarTarea(index, { ...r, edit: true }))
+                                    setEditTask(r.task)
+                                }
 
-                    >X</button>
-                    <button
-                        onClick={() => {
-                            dispatch(EditarTarea())
-                            if (r.edit) {
-                                dispatch(EditarTarea(index, { ...r, edit: false, task: editTask }))
-                                setEditTask("")
-                            } else {
-                                dispatch(EditarTarea(index, { ...r, edit: true }))
-                                setEditTask(r.task)
-                            }
+                            }}
+                        >{r.edit ? "Done" : "Edit"}</button>
+                        <button
+                            onClick={() => {
+                                dispatch(CompletarTarea(index))
+                                r.status
+                                    ? dispatch(EditarTarea(index, { ...r, status: false }))
+                                    : dispatch(EditarTarea(index, { ...r, status: true }))
 
-                        }}
-                    >{r.edit ? "Done" : "Edit"}</button>
-                    <button
-                        onClick={() => {
-                            dispatch(CompletarTarea(index))
-                            r.status
-                                ? dispatch(EditarTarea(index, { ...r, status: false }))
-                                : dispatch(EditarTarea(index, { ...r, status: true }))
+                            }}
+                        >{r.status ? "Deshacer" : "Complete"}</button>
+                        {r.edit
+                            ? <input
+                                onChange={(event) => handleInputEdit(event)}
+                                value={editTask}
 
-                        }}
-                    >{r.status ? "Deshacer" : "Complete"}</button>
-                    {r.edit
-                        ? <input
-                            onChange={(event) => handleInputEdit(event)}
-                            value={editTask}
+                            >
+                            </input>
 
-                        >
-                        </input>
+                            : <p
+                                key={index}
+                                className={r.status
+                                    ? "completeTask"
+                                    : "incompleteTask"}
+                            >{r.task}</p>}
 
-                        : <p
-                            key={index}
-                            className={r.status
-                                ? "completeTask"
-                                : "incompleteTask"}
-                        >{r.task}</p>}
-
-                </div>)}
+                    </div>)}
+                </div>
             </div>
-
         </div>
     )
 }
