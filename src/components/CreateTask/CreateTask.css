@@ -1,6 +1,4 @@
 .createtask{
-    
-    /* background-image: url(blocknote.png); */
     background-repeat: no-repeat;
     background-size:auto;
     background-position: center;
@@ -15,4 +13,24 @@ color : red
 
 .incompleteTask{
 color: black;
+}
+
+.agregar{
+    font-size: 10px;
+    background-color: blue;
+}
+
+.tareas {
+    justify-content: space-between;
+    border-radius: 10px;
+    border-color: black;
+    border: 2px solid rgb(170, 164, 175);
+    background-color: rgb(254, 241, 248);
+    height: flex;
+    width:fit-content;
+    align-items: center;
+    display: flex;
+    margin-left: flex;
+    margin-top: 5px;
+
 }

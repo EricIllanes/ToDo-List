@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./DeleteTask.css"
 import { recuperarTarea } from "../../Redux/actions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { } from "@fortawesome/free-brands-svg-icons"  //prefijo fab
+import { faBell } from "@fortawesome/free-solid-svg-icons"   //prefijo fas
 
 function DeleteTask() {
    const dispatch = useDispatch()

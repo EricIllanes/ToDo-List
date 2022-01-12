@@ -5,6 +5,9 @@ import { BorrarTarea } from "../../Redux/actions";
 import { EditarTarea } from "../../Redux/actions";
 import { CompletarTarea } from "../../Redux/actions";
 import "./CreateTask.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { } from "@fortawesome/free-brands-svg-icons"  //prefijo fab
+import { faPlus, faEdit } from "@fortawesome/free-solid-svg-icons"   //prefijo fas
 
 
 function CreateTask() {
@@ -34,8 +37,11 @@ function CreateTask() {
     return (
 
         <div className="createtask">
+
+
             <div>
                 <h3>Escribe tus tareas acá :D</h3>
+
                 <input
                     type="text"
                     className="tareagregada"
@@ -57,9 +63,10 @@ function CreateTask() {
                             setTask("")             //esto hace que cada vez que se de click se borre todo todito (lo del input)
                         }
                     }}
-                >Agregar Tarea</button>
-                <div className="tareas"> {createtask.map((r, index) =>
-                    <div key={index}>
+                ><FontAwesomeIcon width={'100px'} icon={faPlus} /></button>
+
+                <div > {createtask.map((r, index) =>
+                    <div className="tareas" key={index}>
                         <button
                             className="botoncerrar"
                             onClick={() => {
@@ -80,8 +87,9 @@ function CreateTask() {
                                 }
 
                             }}
-                        >{r.edit ? "Done" : "Edit"}</button>
+                        >{r.edit ? "Done" : <FontAwesomeIcon icon={faEdit} />}</button>
                         <button
+                            className="botonEditar"
                             onClick={() => {
                                 dispatch(CompletarTarea(index))
                                 r.status
@@ -89,7 +97,7 @@ function CreateTask() {
                                     : dispatch(EditarTarea(index, { ...r, status: true }))
 
                             }}
-                        >{r.status ? "Deshacer" : "Complete"}</button>
+                        >{r.status ? <FontAwesomeIcon icon={faPlus} /> : "Complete"}</button>
                         {r.edit
                             ? <input
                                 onChange={(event) => handleInputEdit(event)}
@@ -107,6 +115,7 @@ function CreateTask() {
 
                     </div>)}
                 </div>
+
             </div>
         </div>
     )
