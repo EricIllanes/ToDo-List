@@ -8,6 +8,7 @@ import "./CreateTask.css"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { } from "@fortawesome/free-brands-svg-icons"  //prefijo fab
 import { faPlus, faEdit } from "@fortawesome/free-solid-svg-icons"   //prefijo fas
+import { Icon } from '@iconify/react';
 
 
 function CreateTask() {
@@ -37,7 +38,9 @@ function CreateTask() {
     return (
 
         <div className="createtask">
-
+            <head>
+                <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+            </head>
 
             <div>
                 <h3>Escribe tus tareas acá :D</h3>
@@ -63,18 +66,22 @@ function CreateTask() {
                             setTask("")             //esto hace que cada vez que se de click se borre todo todito (lo del input)
                         }
                     }}
-                ><FontAwesomeIcon width={'100px'} icon={faPlus} /></button>
+                ><Icon className="iconoscreate" icon="akar-icons:circle-plus" /></button>
 
                 <div > {createtask.map((r, index) =>
                     <div className="tareas" key={index}>
-                        <button
-                            className="botoncerrar"
-                            onClick={() => {
-                                dispatch(BorrarTarea(index))
-                                alert("¿Quieres borrar esta tarea?")         //
-                            }}
 
-                        >X</button>
+
+                        <button
+                            className="botonEditar"
+                            onClick={() => {
+                                dispatch(CompletarTarea(index))
+                                r.status
+                                    ? dispatch(EditarTarea(index, { ...r, status: false }))
+                                    : dispatch(EditarTarea(index, { ...r, status: true }))
+
+                            }}
+                        >{r.status ? <FontAwesomeIcon icon={faPlus} /> : "Complete"}</button>
                         <button
                             onClick={() => {
                                 dispatch(EditarTarea())
@@ -87,17 +94,7 @@ function CreateTask() {
                                 }
 
                             }}
-                        >{r.edit ? "Done" : <FontAwesomeIcon icon={faEdit} />}</button>
-                        <button
-                            className="botonEditar"
-                            onClick={() => {
-                                dispatch(CompletarTarea(index))
-                                r.status
-                                    ? dispatch(EditarTarea(index, { ...r, status: false }))
-                                    : dispatch(EditarTarea(index, { ...r, status: true }))
-
-                            }}
-                        >{r.status ? <FontAwesomeIcon icon={faPlus} /> : "Complete"}</button>
+                        >{r.edit ? <Icon icon="fluent:send-28-filled" /> : <Icon icon="ant-design:edit-filled" />}</button>
                         {r.edit
                             ? <input
                                 onChange={(event) => handleInputEdit(event)}
@@ -113,6 +110,14 @@ function CreateTask() {
                                     : "incompleteTask"}
                             >{r.task}</p>}
 
+                        <button
+                            className="botoncerrar"
+                            onClick={() => {
+                                dispatch(BorrarTarea(index))
+                                alert("¿Quieres borrar esta tarea?")         //
+                            }}
+
+                        >X</button>
                     </div>)}
                 </div>
 

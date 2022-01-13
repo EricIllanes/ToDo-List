@@ -8,46 +8,61 @@
 .titulo{
     display: flex;
     transition: 200ms;
-    font:italic;
-    font-size: 60px;
+    font-family: 'Moon Dance', cursive;
+    font-size: 90px;
     text-align: center;
     align-items: center;
-    color: rgb(224, 141, 62);
+    color: #1A374D
 }
 .titulo:hover{
-    color: rgb(255, 187, 187);
-}
-.navbar{
-    display: flex;
-flex-direction: column;
-justify-content:space-between;
-font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-background-color: #bfffff;
-width: 100%;
-}
-.navbar:hover{
-    color:rgb(224, 141, 62)
+    color: #35858B
 }
 
-.botonesnav{
+.navbar{
     display: flex;
 flex-direction: row;
-justify-content: space-around;
+justify-content:space-between;
+background-color: #B1D0E0;
+width: 100%;
+align-items: center;
+}
+
+
+.botonesnav{
+display: flex;
+flex-direction: row;
+justify-content:space-between;
 margin: 5px;
+width: 100%;
+align-items: center;
+
+
 }
-.botonesnav:hover{
-    color: hotpink;
-}
+
 .botonnavbar{
-align-items:flex-end;
+
 justify-content: center;
 border-radius: 50px;
 transition: 200ms;
+font-family:'Moon Dance', cursive;
+font-size: 30px;
+color: #35858B
 }
 .botonnavbar:hover{
-    background-color: rgb(170, 224, 193);
+    background-color: #35858B;
+    color: #AEFEFF;
 }
 
+.home{
+    font-size: 30px;
+    color: #35858B;
+    align-items: center;
+    text-align: center;
+
+}
+.home:hover{
+    color: #AEFEFF;
+}
 
 
 
